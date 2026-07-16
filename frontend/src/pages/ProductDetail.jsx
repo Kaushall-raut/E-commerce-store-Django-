@@ -1,16 +1,41 @@
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { getProductDetail } from "../api/axios";
 
-const ProductDetail=({product})=>{
-    const Base_Url=import.meta.env.VITE_BACKEND_URL
-return(
-<Link to={`product/${product.id}`} className="block bg-white rounded-xl shadow-md hover:shadow-lg hover:scale-[1.02] transition-transform p-4 cursor-pointer ">
+const ProductDetail = () => {
+  const Base_Url = import.meta.env.VITE_BACKEND_URL;
+  const { id } = useParams();
+  const [product, setProduct] = useState(null);
+  const [loading, setLoader] = useState(true);
+  const [error, setError] = useState(null);
 
-<img src={`${Base_Url}${product.image}`} alt={product.name} className="w-full h-56 object-cover rounded-lg mb-4" />
-<h2 className="text-lg font-semibold text-gray-800 truncate">{product.name}</h2>
-<p className="text-gray-600 font-medium">Rs{product.price}</p>
-<p className="text-gray-500 mt-2">{product.description}</p>
-</Link>
-)
-}
+  useEffect(() => {
+    const productDetail = async () => {
+      try {
+        const result = await getProductDetail(id);
+        setProduct(result);
+        setLoader(false);
+      } catch (error) {
+        setError(error.message);
+        setLoader(false);
+      }
+    };
+    productDetail();
+  }, [id, Base_Url]);
+
+  if (loading) {
+    return <h1>Loading ...</h1>;
+  }
+
+  if (error) {
+    return <h1>error</h1>;
+  }
+
+  if (!product) {
+    return <h2>No products found</h2>;
+  }
+
+  
+};
 
 export default ProductDetail;
