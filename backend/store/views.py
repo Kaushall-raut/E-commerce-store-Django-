@@ -44,7 +44,7 @@ def add_to_cart(request):
         item.quantity+=1
         item.save()
 
-        return Response({'message':'product added to cart','cart':CartSerializer(cart).data})
+    return Response({'message':'product added to cart','cart':CartSerializer(cart).data})
 
 @api_view(['POST'])
 def remove_item_from_cart(request):
