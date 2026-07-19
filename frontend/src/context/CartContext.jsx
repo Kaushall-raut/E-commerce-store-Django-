@@ -3,7 +3,7 @@ import { createContext, useContext, useState } from "react";
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  const [cartItem, setCartItems] = useState({});
+  const [cartItem, setCartItems] = useState([]);
 
   const addToCart = (product) => {
     const existing = cartItem.find((item) => item.id === product.id);
@@ -27,19 +27,18 @@ export const CartProvider = ({ children }) => {
   const updateQuantity = (id, quantity) => {
     if (quantity < 1) return;
     setCartItems(
-      cartItem.map((item) => {
-        item.id === id ? { ...item, quantity } : item;
-      }),
+      cartItem.map((item) => (item.id === id ? { ...item, quantity } : item)),
     );
   };
 
-
-
-  return (<CartContext.Provider value={addToCart,removeItemFromCart,updateQuantity}>
-    {children}
-  </CartContext.Provider>)
-
+  return (
+    <CartContext.Provider
+      value={{ addToCart, removeItemFromCart, updateQuantity ,cartItem}}
+    >
+      {children}
+    </CartContext.Provider>
+  );
 };
 
 // eslint-disable-next-line react-hooks/rules-of-hooks, react-refresh/only-export-components
-export const userCart=()=>useContext(CartContext);
+export const userCart = () => useContext(CartContext);
