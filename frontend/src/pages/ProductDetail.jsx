@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getProductDetail } from "../api/axios";
+import { userCart } from "../context/CartContext";
 
 const ProductDetail = () => {
   const Base_Url = import.meta.env.VITE_BACKEND_URL;
@@ -8,6 +9,7 @@ const ProductDetail = () => {
   const [product, setProduct] = useState(null);
   const [loading, setLoader] = useState(true);
   const [error, setError] = useState(null);
+  const { addToCart } = userCart();
 
   useEffect(() => {
     const productDetail = async () => {
@@ -51,12 +53,11 @@ const ProductDetail = () => {
             <p className="text-2xl font-semibold text-green-600 mb-6">
               {product.price}
             </p>
-            <button className="bg-blue-600 text-white px-6 py-2 transition rounded-lg hover:bg-blue-700">
+            <button onClick={()=> addToCart(product)} className="bg-blue-600 text-white px-6 py-2 transition rounded-lg hover:bg-blue-700">
               Add to cart
             </button>
             <div className="mt-4">
               <a href="/" className="text-blue-600 hover:underline ">
-                
                 Back to home
               </a>
             </div>
