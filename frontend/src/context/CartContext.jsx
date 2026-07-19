@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 const CartContext = createContext();
 
@@ -41,4 +41,5 @@ export const CartProvider = ({ children }) => {
 
 };
 
-// export const userCart=()=>useContext(CartContext);
+// eslint-disable-next-line react-hooks/rules-of-hooks, react-refresh/only-export-components
+export const userCart=()=>useContext(CartContext);
