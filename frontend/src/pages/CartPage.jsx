@@ -1,9 +1,9 @@
 import { userCart } from "../context/CartContext";
 
 const CartPage = () => {
-  const { cartItem, removeItemFromCart, updateQuantity } = userCart();
-
-  const total = cartItem.reduce((acc, item) => item.price * item.quantity, 0);
+  const { cartItem, total, removeItemFromCart, updateQuantity } = userCart();
+  const Base_Url = import.meta.env.VITE_BACKEND_URL;
+  // const total = cartItem.reduce((acc, item) => item.price * item.quantity, 0);
 
   return (
     <div className="pt-20 min-h-screen bg-gray-100 p-8">
@@ -17,9 +17,18 @@ const CartPage = () => {
               key={item.id}
               className="flex items-center justify-between mb-4"
             >
+              <div className="flex items-center gap-4">
+                {item.product_image && (
+                  <img
+                    src={`${Base_Url}${item.product_image}`}
+                    alt={item.product_name}
+                    className="'w-20 h-20 object-cover rounded"
+                  />
+                )}
+              </div>
               <div>
-                <h2 className="text-lg font-semibold">{item.name}</h2>
-                <p className="text-gray-600">rs {item.price}</p>
+                <h2 className="text-lg font-semibold">{item.product_name}</h2>
+                <p className="text-gray-600">rs {item.product_price}</p>
               </div>
               <div className="flex items-center gap-3">
                 <button
