@@ -31,7 +31,7 @@ export const CartProvider = ({ children }) => {
         },
         body: JSON.stringify({ product_id: product }),
       });
-      fetchCart()
+      fetchCart();
     } catch (error) {
       console.error("error while adding items", error);
     }
@@ -46,7 +46,7 @@ export const CartProvider = ({ children }) => {
         },
         body: JSON.stringify({ item_id: id }),
       });
-      fetchCart()
+      fetchCart();
     } catch (error) {
       console.error("Error while removing", error);
     }
@@ -66,15 +66,27 @@ export const CartProvider = ({ children }) => {
         },
         body: JSON.stringify({ item_id: id, quantity }),
       });
-      fetchCart()
+      fetchCart();
     } catch (error) {
       console.error("error while updating cart", error);
     }
   };
 
+  const clearCart = () => {
+    setCartItems([]);
+    setTotal(0);
+  };
+
   return (
     <CartContext.Provider
-      value={{ addToCart, removeItemFromCart, updateQuantity, cartItem, total }}
+      value={{
+        addToCart,
+        removeItemFromCart,
+        updateQuantity,
+        cartItem,
+        total,
+        clearCart,
+      }}
     >
       {children}
     </CartContext.Provider>
