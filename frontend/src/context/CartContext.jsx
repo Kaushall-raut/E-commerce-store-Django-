@@ -14,6 +14,8 @@ export const CartProvider = ({ children }) => {
       throw new Error("Failed to fetch");
     }
     const data =await response.json();
+    console.log("d",data);
+    
     setCartItems(data.items || []);
     setTotal(data.total || 0);
     console.log("data",data)

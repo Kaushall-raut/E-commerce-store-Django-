@@ -31,6 +31,7 @@ def get_products(request,pk):
 def get_cart(request):
     cart,created=Cart.objects.get_or_create(user=None)
     serializer=CartSerializer(cart)
+    print(serializer.data)
     return Response(serializer.data)
 
 @api_view(['POST'])
