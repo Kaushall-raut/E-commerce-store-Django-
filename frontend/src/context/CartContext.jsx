@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getCart } from "../api/axios";
+// import { getCart } from "../api/axios";
 
 const CartContext = createContext();
 const Base_Url = import.meta.env.VITE_BACKEND_URL;
@@ -9,13 +9,14 @@ export const CartProvider = ({ children }) => {
   const [total, setTotal] = useState(0);
 
   const fetchCart = async () => {
-    const response = await getCart();
+    const response = await fetch(`${Base_Url}/api/cart`);
     if (!response.ok) {
       throw new Error("Failed to fetch");
     }
-    const data = response.json();
-    setCartItems(data.item || []);
+    const data =await response.json();
+    setCartItems(data.items || []);
     setTotal(data.total || 0);
+    console.log("data",data)
   };
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -31,6 +32,7 @@ export const CartProvider = ({ children }) => {
         },
         body: JSON.stringify({ product_id: product }),
       });
+      console.log(product)
       fetchCart();
     } catch (error) {
       console.error("error while adding items", error);

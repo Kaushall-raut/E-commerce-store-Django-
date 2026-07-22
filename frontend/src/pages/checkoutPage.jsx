@@ -80,7 +80,7 @@ export const CheckoutPage = () => {
             placeholder=" Phone Number"
             value={form.phone}
             onChange={handleChange}
-            required
+            
             className="w-full border rounded-lg p-2"
           />
 

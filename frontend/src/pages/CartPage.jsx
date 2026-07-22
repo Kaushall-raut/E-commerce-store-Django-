@@ -5,6 +5,7 @@ const CartPage = () => {
   const { cartItem, total, removeItemFromCart, updateQuantity } = userCart();
   const Base_Url = import.meta.env.VITE_BACKEND_URL;
   // const total = cartItem.reduce((acc, item) => item.price * item.quantity, 0);
+  console.log("s",cartItem)
 
   return (
     <div className="pt-20 min-h-screen bg-gray-100 p-8">

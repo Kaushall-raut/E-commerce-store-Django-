@@ -22,12 +22,12 @@ export const getProductDetail = async (id) => {
 };
 
 export const getCart = async () => {
-  try {
-    const response =await axios.get(`${Base_Url}/api/cart`)
-
+   try {
+    const response = await axios.get(`${Base_Url}/api/cart`);
     return response;
   } catch (error) {
     console.error("Error while fetching data in axios", error);
+    throw error; // Re-throw the error
   }
 };
 
