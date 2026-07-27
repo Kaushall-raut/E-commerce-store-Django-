@@ -36,6 +36,13 @@ const ProductDetail = () => {
   if (!product) {
     return <h2>No products found</h2>;
   }
+  const handleAddToCart=()=>{
+    if(!localStorage.getItem('access_token')){
+      window.location.href='/login'
+      return;
+    }
+    addToCart(product.id)
+  }
 
   return (
     <div className="min-h-screen bg-gray-100 flex justify-center items-center py-10">
@@ -53,7 +60,7 @@ const ProductDetail = () => {
             <p className="text-2xl font-semibold text-green-600 mb-6">
               {product.price}
             </p>
-            <button onClick={()=> addToCart(product.id)} className="bg-blue-600 text-white px-6 py-2 transition rounded-lg hover:bg-blue-700 cursor-pointer">
+            <button onClick={handleAddToCart} className="bg-blue-600 text-white px-6 py-2 transition rounded-lg hover:bg-blue-700 cursor-pointer">
               Add to cart
             </button>
             <div className="mt-4">
