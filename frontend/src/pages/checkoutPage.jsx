@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { userCart } from "../context/CartContext";
 import { useState } from "react";
+import { authFetch } from "../utils/auth";
 
 export const CheckoutPage = () => {
   const Base_Url = import.meta.env.VITE_BACKEND_URL;
@@ -23,7 +24,7 @@ export const CheckoutPage = () => {
     setError("");
 
     try {
-      const response = await fetch(`${Base_Url}/api/order/create`, {
+      const response = await authFetch(`${Base_Url}/api/order/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
