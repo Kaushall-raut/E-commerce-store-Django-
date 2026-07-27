@@ -13,13 +13,14 @@ export const CartProvider = ({ children }) => {
   const fetchCart = async () => {
     const response = await authFetch(`${Base_Url}/api/cart`);
     const data =await response.json();
-    console.log("d",data);
+    // console.log("d",data);
     
     setCartItems(data.items || []);
     setTotal(data.total || 0);
     console.log("data",data)
   };
   useEffect(() => {
+ 
     // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchCart();
   }, []);
@@ -33,7 +34,7 @@ export const CartProvider = ({ children }) => {
         },
         body: JSON.stringify({ product_id: product }),
       });
-      console.log(product)
+      // console.log("product",product)
       fetchCart();
     } catch (error) {
       console.error("error while adding items", error);

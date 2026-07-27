@@ -134,14 +134,13 @@ CORS_ALLOW_ALL_ORIGINS=[
 
 MEDIA_URL='/media/'
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
-
-REST_FRAMEWORK={
-    'DEFAULT_PERMISSION_CLASSES':{
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-        
-    },'DEFAULT_PERMISSION_CLASSES':{
-        'rest_framework.permissions.AllowAny'
-    }
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+    "DEFAULT_PERMISSION_CLASSES": (
+        "rest_framework.permissions.AllowAny",
+    ),
 }
 
 SIMPLE_JWT={
@@ -149,5 +148,5 @@ SIMPLE_JWT={
     'REFRESH_TOKEN_LIFETIME':timedelta(days=1),
     'ROTATE_REFRESH_TOKENS':False,
     'BLACKLIST_AFTER_ROTATION':True,
-    'AUTH_HEADER_TYPES':('Bearer')
+    'AUTH_HEADER_TYPES':('Bearer',)
 }

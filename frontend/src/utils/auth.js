@@ -13,6 +13,7 @@ export const getAccessToken = () => {
 
 export const authFetch = (url, options = {}) => {
   const token = getAccessToken();
+
   const headers = options.headers ? { ...options.headers } : {};
   if (token) headers["Authorization"] = `Bearer ${token}`;
   headers["Content-Type"] = "application/json";

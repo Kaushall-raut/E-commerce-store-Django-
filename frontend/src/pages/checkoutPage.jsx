@@ -78,6 +78,7 @@ export const CheckoutPage = () => {
 
           <input
             type="tel"
+            name="phone"
             placeholder=" Phone Number"
             value={form.phone}
             onChange={handleChange}

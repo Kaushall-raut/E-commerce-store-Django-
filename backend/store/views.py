@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from rest_framework import status
 
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def get_product(request):
     product=Products.objects.all()
     serializer=ProductSerializer(product,many=True)
@@ -15,6 +16,7 @@ def get_product(request):
     return Response(serializer.data)
 
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def get_categories(request):
     category=Category.objects.all()
     serializer=CategorySerializer(category,many=True)
@@ -22,6 +24,7 @@ def get_categories(request):
     return Response(serializer.data)
 
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def get_products(request,pk):
     try:
         product=Products.objects.get(id=pk)
